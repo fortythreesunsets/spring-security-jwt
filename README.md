@@ -129,6 +129,7 @@ DATABASE:
 DB_USER:
 DB_PASSWORD: 
 ```
+Más información: https://devcenter.heroku.com/articles/config-vars
 7. Actualizar application properties copiando los valores de Host:Port/Database, User y Password
 ```
 spring.datasource.url=jdbc:postgresql://ec2-54-159-22-90.compute-1.amazonaws.com:5432/d3o07c0vsctete
@@ -146,8 +147,29 @@ spring.datasource.password=${DB_PASSWORD}
    * DB_USER: opakqpyovgsjhh
    * DB_PASSWORD: 45d346975063932ac81c707af0a912459947bd5ccd57d5148d3fd6186286f887
 9. Hacer commit con los cambios
+10. En el dashboard de Heroku, ir a Deploy > Manual Deploy > Deploy Branch
+11. Probar en Postman:
+* Request POST https://spring-security--jwt.herokuapp.com/api/auth/register 
+ ```json
+{
+"username": "srl",
+"email": "srl@mail.com",
+"password": "123456"
+}
+```
+* Request POST https://spring-security--jwt.herokuapp.com/api/auth/login
+ ```json
+{
+"username": "srl",
+"password": "123456"
+}
+```
+* Request GET https://spring-security--jwt.herokuapp.com/api/cars
+Authorization > Bearer Token > Copiar token generado en /login 
+12. Abrir DBeaver > Crear nueva conexión> PostgreSQL y en la ventana Conectar a base de datos, ingresar host, database, username y password generados en Heroku. Para cambiar el nombre de la conexión, dar click derecho en la conexión > Editar Connection > General > Nombre de la conexión: nuevo nombre
 
 # Frontend: Configuración Vercel
 1. Subir proyecto a Github
-2. Ajustar URL al backend
-3. Subir a Vercel
+2. Enlazar Github a Vercel y seleccionar repositorio e importarlo
+3. En la pantalla Configure project, dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSource de la clase SecurityConfig
+4. Subir a Vercel
