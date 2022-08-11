@@ -119,9 +119,15 @@ https://github.com/bezkoder/spring-boot-spring-security-jwt-authentication
 1. Crear el archivo system.properties en la raíz del proyecto especificando la versión de java (la misma que está en pom.xml): 
 `java.runtime.version=17`
 2. Subir proyecto a Github
-3. Conectar el proyecto a heroku para realizar despliegue
-4. Añadir add-on de PostreSQL en Heroku
-5. Actualizar application properties 
+3. Conectar el proyecto a Heroku
+4. Añadir add-on de PostgreSQL en Heroku en la pestaña Resources en el dashboard
+5. Dar click en el add-on agregado (Heroku Postgres) y en la ventana que abre ir a Settings > View credentials
+6. Actualizar application properties copiando los valores de Host:Port/Database, User y Password
+```
+spring.datasource.url=ec2-54-159-22-90.compute-1.amazonaws.com:5432/d3o07c0vsctete
+spring.datasource.username=opakqpyovgsjhh
+spring.datasource.password=45d346975063932ac81c707af0a912459947bd5ccd57d5148d3fd6186286f887
+```
 
 # Frontend: Configuración Vercel
 1. Subir proyecto a Github
