@@ -172,4 +172,5 @@ Authorization > Bearer Token > Copiar token generado en /login
 1. Subir proyecto a Github
 2. Enlazar Github a Vercel y seleccionar repositorio e importarlo
 3. En la pantalla Configure project, dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSource de la clase SecurityConfig
-4. Subir a Vercel
+4. Hacer commit de los cambios
+5. Nuevamente hacer deploy del proyecto desde Heroku
