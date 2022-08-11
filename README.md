@@ -122,12 +122,30 @@ https://github.com/bezkoder/spring-boot-spring-security-jwt-authentication
 3. Conectar el proyecto a Heroku
 4. Añadir add-on de PostgreSQL en Heroku en la pestaña Resources en el dashboard
 5. Dar click en el add-on agregado (Heroku Postgres) y en la ventana que abre ir a Settings > View credentials
-6. Actualizar application properties copiando los valores de Host:Port/Database, User y Password
+6. En el dashboard de Heroku, ir a Settings y dar click en Reveal Config Vars, agregar con los valores obtenidos anteriormente
 ```
-spring.datasource.url=ec2-54-159-22-90.compute-1.amazonaws.com:5432/d3o07c0vsctete
+HOST: 
+DATABASE:
+DB_USER:
+DB_PASSWORD: 
+```
+7. Actualizar application properties copiando los valores de Host:Port/Database, User y Password
+```
+spring.datasource.url=jdbc:postgresql://ec2-54-159-22-90.compute-1.amazonaws.com:5432/d3o07c0vsctete
+spring.datasource.url=jdbc:postgresql://${HOST}:5432/${DATABASE}
+
 spring.datasource.username=opakqpyovgsjhh
+spring.datasource.username=${DB_USER}
+
 spring.datasource.password=45d346975063932ac81c707af0a912459947bd5ccd57d5148d3fd6186286f887
+spring.datasource.password=${DB_PASSWORD}
 ```
+8. (WIN) Crear variables de entorno > Variables de usuario para el sistema
+   * HOST: localhost 
+   * DATABASE: d3o07c0vsctete
+   * DB_USER: opakqpyovgsjhh
+   * DB_PASSWORD: 45d346975063932ac81c707af0a912459947bd5ccd57d5148d3fd6186286f887
+9. Hacer commit con los cambios
 
 # Frontend: Configuración Vercel
 1. Subir proyecto a Github
