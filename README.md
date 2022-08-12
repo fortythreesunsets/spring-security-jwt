@@ -174,3 +174,27 @@ Authorization > Bearer Token > Copiar token generado en /login
 3. En la pantalla Configure project, dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSource de la clase SecurityConfig
 4. Hacer commit de los cambios
 5. Nuevamente hacer deploy del proyecto desde Heroku
+
+## Generar site de documentación del proyecto
+1. Agregar dependencia de maven-site a pom.xml
+```
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-site-plugin</artifactId>
+	<version>3.12.1</version>
+</plugin>
+```
+2. En la pestaña Maven de IntelliJ > Lifecycle > doble click en site
+3. En la pestaña Project, abrir carpeta target > site > index.html
+4. Agregar debajo de </dependencies>:
+```
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.4.0</version>
+			</plugin>
+		</plugins>
+	</reporting>
+```
