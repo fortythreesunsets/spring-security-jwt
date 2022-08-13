@@ -22,19 +22,32 @@ public class CarServiceImpl implements CarService {
     private CarRepository carRepository;
     public CarServiceImpl(CarRepository carRepository) { this.carRepository = carRepository; }
 
-
+    /**
+     * Recupera todos los coches de la BD
+     * @return
+     */
     @Override
     public List<Car> findAll() {
         log.info("Executing findAll Cars");
         return this.carRepository.findAll();
     }
 
+    /**
+     * Recupera un coche de la BD por medio de su ID
+     * @param id identificador único de coche
+     * @return
+     */
     @Override
     public Optional<Car> findById(Long id) {
         log.info("Executing findById");
         return this.carRepository.findById(id);
     }
 
+    /**
+     * Encontrar coches por el número de puertas ingresado
+     * @param doors número de puertas a buscar
+     * @return
+     */
     @Override
     public List<Car> findByDoors(Integer doors) {
         log.info("Searching cars by number of doors");
@@ -45,12 +58,21 @@ public class CarServiceImpl implements CarService {
         return this.carRepository.findByDoors(doors);
     }
 
+    /**
+     * Contar el total de coches en la BD
+     * @return
+     */
     @Override
     public Long count() {
         log.info("Get total number of cars");
         return this.carRepository.count();
     }
 
+    /**
+     * Guarda un coche nuevo o modificado en la BD
+     * @param car
+     * @return
+     */
     @Override
     public Car save(Car car) {
         log.info("Creating/Updating car");
@@ -68,6 +90,12 @@ public class CarServiceImpl implements CarService {
         return carDB;
     }
 
+    /**
+     * Valida que el coche se cree no tenga atributos vacíos
+     * ni menos de las puertas establecidas
+     * @param car objeto car
+     * @return
+     */
     private boolean validateCar(Car car) {
         // Null car validation
         if (car == null) {
@@ -79,12 +107,13 @@ public class CarServiceImpl implements CarService {
             log.warn("Trying to create a car with invalid number of doors");
             return false;
         }
-        // Color validation
-        // ...
-
         return true;
     }
 
+    /**
+     * Elimina un coche de la BD por su ID
+     * @param id
+     */
     @Override
     public void deleteById(Long id) {
         log.info("Deleting car by id");
@@ -100,6 +129,9 @@ public class CarServiceImpl implements CarService {
 
     }
 
+    /**
+     * Elimina todos los coches de la BD
+     */
     @Override
     public void deleteAll() {
         log.info("Deleting all cars");

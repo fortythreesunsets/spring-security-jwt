@@ -75,7 +75,7 @@ Crear proyecto Spring Boot con dependencias:
 
 Añadir: 
 * JWT
-```xml
+```
 <!-- https://mvnrepository.com/artifact/io.jsonwebtoken -->
 <dependency>
     <groupId>io.jsonwebtoken</groupId>
@@ -143,7 +143,7 @@ spring.datasource.password=${DB_PASSWORD}
 ```
 8. (WIN) Crear variables de entorno > Variables de usuario para el sistema
    * HOST: localhost 
-   * DATABASE: d3o07c0vsctete
+   * DATABASE: d3o07c0vsctete 
    * DB_USER: opakqpyovgsjhh
    * DB_PASSWORD: 45d346975063932ac81c707af0a912459947bd5ccd57d5148d3fd6186286f887
 9. Hacer commit con los cambios
@@ -176,25 +176,83 @@ Authorization > Bearer Token > Copiar token generado en /login
 5. Nuevamente hacer deploy del proyecto desde Heroku
 
 ## Generar site de documentación del proyecto
-1. Agregar dependencia de maven-site a pom.xml
+1. Agregar `%JAVA_HOME%\bin` a Path en Variables del Sistema
+2. Agregar plugin de maven-site a pom.xml en <build>
 ```
 <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-site-plugin</artifactId>
-	<version>3.12.1</version>
+   <groupId>org.apache.maven.plugins</groupId>
+   <artifactId>maven-site-plugin</artifactId>
+   <version>3.12.1</version>
+</plugin>
+<plugin>
+   <groupId>org.apache.maven.plugins</groupId>
+   <artifactId>maven-surefire-plugin</artifactId>
+   <version>3.0.0-M7</version>
+</plugin>
+<!-- Medir cobertura de los test -->
+<plugin>
+   <groupId>org.jacoco</groupId>
+   <artifactId>jacoco-maven-plugin</artifactId>
+   <version>0.8.8</version>
+   <executions>
+      <execution>
+         <id>prepare-agent</id>
+		 <goals>
+            <goal>prepare-agent</goal>
+		 </goals>
+	  </execution>
+	  <execution>
+	     <id>report</id>
+		 <phase>test</phase>
+		 <goals>
+		    <goal>report</goal>
+		 </goals>
+	  </execution>
+   </executions>
 </plugin>
 ```
-2. En la pestaña Maven de IntelliJ > Lifecycle > doble click en site
-3. En la pestaña Project, abrir carpeta target > site > index.html
-4. Agregar debajo de </dependencies>:
+2. Agregar maven-javadoc-plugin, maven-project-info-reports-plugin, maven-surefire-report-plugin y jacoco-maven-plugin debajo de </dependencies>:
 ```
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.4.0</version>
-			</plugin>
-		</plugins>
-	</reporting>
+<reporting>
+   <plugins>
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-javadoc-plugin</artifactId>
+         <version>3.4.0</version>
+	  </plugin>
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-project-info-reports-plugin</artifactId>
+         <version>3.4.0</version>
+	  </plugin>
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-surefire-report-plugin</artifactId>
+         <version>3.0.0-M5</version>
+      </plugin>
+      <plugin>
+         <groupId>org.jacoco</groupId>
+         <artifactId>jacoco-maven-plugin</artifactId>
+         <version>0.8.8</version>
+      </plugin>
+      <plugin>
+         <groupId>org.jacoco</groupId>
+         <artifactId>jacoco-maven-plugin</artifactId>
+         <reportSets>
+            <reportSet>
+               <reports>
+                  <!-- Select non-aggregate reports -->
+                  <report>report</report>
+			   </reports>
+			</reportSet>
+		 </reportSets>
+	  </plugin>
+   </plugins>
+</reporting>
 ```
+3. En la pestaña Maven de IntelliJ > Lifecycle > doble click en site
+4. En la pestaña Project, abrir carpeta target > site > index.html
+5. En el site, ir a Project Reports 
+
+## Solución de problemas (WIP)
+File > Invalidate Caches... > Invalidate and Restart 
