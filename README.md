@@ -179,7 +179,7 @@ Authorization > Bearer Token > Copiar token generado en /login
 * hello.service.ts: `'https://spring-security--jwt.herokuapp.com/api/'`
 5. Commit proyecto a Github
 6. Enlazar Github a Vercel y seleccionar repositorio e importarlo
-7. En vercel.com ir a Settings > Environment variables y agregar los mismos valores que las creadas en Heroku:
+8. En la pantalla Configure project, abrir Environment variables y agregar los mismos valores que las creadas en Heroku:
 ```
 HOST: 
 DATABASE:
@@ -187,7 +187,7 @@ DATABASE_URL:
 DB_USER:
 DB_PASSWORD: 
 ```
-8. En la pantalla Configure project, dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSource de la clase SecurityConfig
+dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSource de la clase SecurityConfig
 9. Hacer commit de los cambios
 10. Nuevamente hacer deploy del proyecto desde Heroku
 
