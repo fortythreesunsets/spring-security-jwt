@@ -126,6 +126,7 @@ https://github.com/bezkoder/spring-boot-spring-security-jwt-authentication
 ```
 HOST: 
 DATABASE:
+DATABASE_URL:
 DB_USER:
 DB_PASSWORD: 
 ```
@@ -169,11 +170,26 @@ Authorization > Bearer Token > Copiar token generado en /login
 12. Abrir DBeaver > Crear nueva conexión> PostgreSQL y en la ventana Conectar a base de datos, ingresar host, database, username y password generados en Heroku. Para cambiar el nombre de la conexión, dar click derecho en la conexión > Editar Connection > General > Nombre de la conexión: nuevo nombre
 
 # Frontend: Configuración Vercel
-1. Subir proyecto a Github
-2. Enlazar Github a Vercel y seleccionar repositorio e importarlo
-3. En la pantalla Configure project, dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSource de la clase SecurityConfig
-4. Hacer commit de los cambios
-5. Nuevamente hacer deploy del proyecto desde Heroku
+1. En github hacer fork del repositorio https://github.com/alansastre/angular-springboot1
+2. En IntelliJ ir a Git > Clone > https://github.com/fortythreesunsets/angular-springboot1
+3. Abrir el proyecto clonado en terminal y ejecutar `npm install` para generar la carpeta node_modules
+4. Actualizar la url del backend en la variable `const AUTH_API` en src > app > _services
+* auth.service.ts: `'https://spring-security--jwt.herokuapp.com/api/auth/'`
+* cars.service.ts: `'https://spring-security--jwt.herokuapp.com/api/'`
+* hello.service.ts: `'https://spring-security--jwt.herokuapp.com/api/'`
+5. Commit proyecto a Github
+6. Enlazar Github a Vercel y seleccionar repositorio e importarlo
+7. En vercel.com ir a Settings > Environment variables y agregar los mismos valores que las creadas en Heroku:
+```
+HOST: 
+DATABASE:
+DATABASE_URL:
+DB_USER:
+DB_PASSWORD: 
+```
+8. En la pantalla Configure project, dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSource de la clase SecurityConfig
+9. Hacer commit de los cambios
+10. Nuevamente hacer deploy del proyecto desde Heroku
 
 ## Generar site de documentación del proyecto
 1. Agregar `%JAVA_HOME%\bin` a Path en Variables del Sistema

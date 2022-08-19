@@ -85,7 +85,7 @@ public class SecurityConfig {
     {
         final CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOriginPatterns(List.of("http://localhost:4200", "https://spring-security-jwt-virid.vercel.app"));
+        configuration.setAllowedOriginPatterns(List.of("http://localhost:4200", "https://spring-security-jwt-cars-virid.vercel.app"));
         configuration.setAllowedMethods(List.of("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
         configuration.setAllowedHeaders(List.of("Access-Control-Allow-Origin", "X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
         configuration.setAllowCredentials(true);
