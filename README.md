@@ -170,14 +170,40 @@ Authorization > Bearer Token > Copiar token generado en /login
 12. Abrir DBeaver > Crear nueva conexión> PostgreSQL y en la ventana Conectar a base de datos, ingresar host, database, username y password generados en Heroku. Para cambiar el nombre de la conexión, dar click derecho en la conexión > Editar Connection > General > Nombre de la conexión: nuevo nombre
 
 # Frontend: Configuración Vercel
+-- PREPARACIÓN DEL ENTORNO FRONTEND:
 1. En github hacer fork del repositorio https://github.com/alansastre/angular-springboot1
 2. En IntelliJ ir a Git > Clone > https://github.com/fortythreesunsets/angular-springboot1
 3. Abrir el proyecto clonado en terminal y ejecutar `npm install` para generar la carpeta node_modules
-4. Actualizar la url del backend en la variable `const AUTH_API` en src > app > _services
+4. Actualizar versión de Angular del proyecto a través de terminal en el directorio raíz del proyecto angular 
+   1. Ejecutar `ng update` para obtener una lista de las dependencias que requieren ser actualizadas
+   Ejemplo: 
+   ```
+    Name                               Version                  Command to update
+     --------------------------------------------------------------------------------
+      @angular/cli                       13.3.9 -> 14.1.3         ng update @angular/cli
+      @angular/core                      13.3.11 -> 14.1.3        ng update @angular/core
+   ```
+   2. Ejecutar `ng update @angular/cli @angular/core --allow-dirty --force` para migrar el proyecto a la versión actual de Angular
+   3. Ejecutar `ng build`
+
+MÁS INFO: https://www.thecodebuzz.com/this-version-of-cli-is-only-compatible-with-angular-version-or-but-found-instead/
+
+# EJECUCIÓN LOCAL:
+1. Actualizar la url del backend en la variable `const AUTH_API` en src > app > _services del proyecto angular-springboot1
+* auth.service.ts: `'http://localhost:8080/api/auth/'`
+* cars.service.ts: `'http://localhost:8080/api/'`
+* hello.service.ts: `'http://localhost:8080/api/'`
+2. Iniciar backend: ejecutar app spring-security-jwt
+3. Iniciar frontend: Ejecutar `ng serve`
+4. Entrar al frontend a través del navegador http://localhost:4200
+5. Finalizar la ejecución del frontend con CTRL + C en terminal
+
+# EJECUCIÓN CLOUD:
+1. Actualizar la url del backend en la variable `const AUTH_API` en src > app > _services del proyecto angular-springboot1
 * auth.service.ts: `'https://spring-security--jwt.herokuapp.com/api/auth/'`
 * cars.service.ts: `'https://spring-security--jwt.herokuapp.com/api/'`
 * hello.service.ts: `'https://spring-security--jwt.herokuapp.com/api/'`
-5. Commit proyecto a Github
+5. Commit and Push proyecto angular a Github
 6. Enlazar Github a Vercel y seleccionar repositorio e importarlo
 8. En la pantalla Configure project, abrir Environment variables y agregar los mismos valores que las creadas en Heroku:
 ```
@@ -187,9 +213,11 @@ DATABASE_URL:
 DB_USER:
 DB_PASSWORD: 
 ```
-dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSource de la clase SecurityConfig
-9. Hacer commit de los cambios
-10. Nuevamente hacer deploy del proyecto desde Heroku
+9. Dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSource de la clase SecurityConfig
+   * Si genera el error `npm WARN deprecated source-map-resolve@0.6.0: See https://github.com/lydell/source-map-resolve#deprecated`, ejecutar `npm install source-map-resolve` a través de terminal en el directorio raíz del proyecto angular
+   * Volver a importar el proyecto
+10. Hacer commit de los cambios del proyecto spring-security-jwt
+11. Nuevamente hacer deploy del proyecto desde Heroku
 
 ## Generar site de documentación del proyecto
 1. Agregar `%JAVA_HOME%\bin` a Path en Variables del Sistema
@@ -272,3 +300,6 @@ dar click en Deploy y copiar la URL que se genera en el Bean CorsConfigurationSo
 
 ## Solución de problemas (WIP)
 File > Invalidate Caches... > Invalidate and Restart 
+
+* Vercel no toma el fork creado: ir a carpeta del proyecto en terminal y ejecutar `ng update` para saber qué se debe actualizar
+`ng update @angular/cli @angular/core --allow-dirty --force`
