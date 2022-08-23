@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -12,9 +12,10 @@
 	<artifactId>spring-security-jwt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-security-jwt</name>
-	<description>Spring Boot with JWT security demo project for deployment in Heroku</description>
+	<description>Spring Boot project with JWT security for deployment in Heroku and Vercel</description>
 	<properties>
 		<java.version>17</java.version>
+		<linkXRef>false</linkXRef>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,6 +47,11 @@
 			<artifactId>codegen-utils</artifactId>
 			<version>5.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-maven-plugin</artifactId>
+			<version>5.0.0</version>
+		</dependency>
 
 		<!-- Documentación con Swagger -->
 		<dependency>
@@ -60,7 +66,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-	<!-- Spring Security + JWT -->
+		<!-- Spring Security + JWT -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -87,17 +93,33 @@
 		</dependency>
 	</dependencies>
 
+	<!-- Reports -->
 	<reporting>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<version>3.4.0</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.4.0</version>
+				<reportSets>
+					<reportSet><!-- aggregate reportSet, to define in poms having modules -->
+						<id>aggregate</id>
+						<inherited>false</inherited><!-- don't run aggregate in child modules -->
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+					<reportSet>
+						<id>default</id>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -140,7 +162,8 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M7</version>
 			</plugin>
-		<!-- Medir cobertura de los test -->
+
+			<!-- Medir cobertura de los test -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
