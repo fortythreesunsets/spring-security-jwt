@@ -338,7 +338,7 @@ Agregar en pom.xml
     ...
   </reporting>
 ```
-|·······················································································|
+			|·······················································································|
                                  
 No se generan carpetas apidocs y testapidocs en target/site (No resuelto)
 
@@ -359,7 +359,8 @@ No se generan carpetas apidocs y testapidocs en target/site (No resuelto)
     </remote-repository>
   </component>
 ```
-|·······················································································|
+			|·······················································································|
+
 `Unable to locate Test Source XRef to link to - DISABLED`
 * Agregar `<linkXRef>false</linkXRef>` dentro de `<properties></properties>` en pom.xml
  
