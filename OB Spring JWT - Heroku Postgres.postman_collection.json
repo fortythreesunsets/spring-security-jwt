@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "843c1761-1398-4e7c-9b11-28e853535576",
+		"name": "OB Spring JWT - Heroku Postgres",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19990311"
+	},
+	"item": [
+		{
+			"name": "api/auth/register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"username\": \"srl\",\r\n        \"email\": \"srl@mail.com\",\r\n        \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://spring-security--jwt.herokuapp.com/api/auth/register",
+					"protocol": "https",
+					"host": [
+						"spring-security--jwt",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/cars",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaWx2aWFydXYiLCJpYXQiOjE2NjAzMjY4OTAsImV4cCI6MTY2MDQxMzI5MH0.8xFIU4fpp2N8WHtLQG0FrPOR6lviCgmyvdPVKGfm1ZI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://spring-security--jwt.herokuapp.com/api/cars",
+					"protocol": "https",
+					"host": [
+						"spring-security--jwt",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/auth/login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"username\": \"silviaruv\",\r\n        \"password\": \"s1i2l3v4i5a6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://spring-security--jwt.herokuapp.com/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"spring-security--jwt",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
