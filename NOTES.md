@@ -133,7 +133,7 @@ DB_USER:
 DB_PASSWORD: 
 ```
 Más información: https://devcenter.heroku.com/articles/config-vars
-7. Actualizar application properties copiando los valores de Host:Port/Database, User y Password
+7. Actualizar application.properties copiando los valores de Host:Port/Database, User y Password
 ```
 spring.datasource.url=jdbc:postgresql://aa2-00-456-89-20.compute-1.amazonaws.com:5432/p3o07c0vscreti
 spring.datasource.url=jdbc:postgresql://${HOST}:5432/${DATABASE}
@@ -177,20 +177,25 @@ Authorization > Bearer Token > Copiar token generado en /login
 3. Conectar el proyecto a Railway. En el dashboard > **+New Project** > **Deploy From GitHub Repo** > **Configure GitHub App** y seleccionar repositorio > **Deploy Now**
 4. Agregar Postgres: CTRL + K > **New Service** > Ir a **Database** > **Add PostgreSQL**
 5. Agregar variables de entorno: dar click en el cuadro del proyecto > Variables > **Raw Editor** y copiar variables y valores
-5.1 Importar variables de entorno de Heroku: En el proyecto en Railway CTRL + K > **Import Variables From Heroku**
+6. (WIN) Crear/Modificar variables de entorno > Variables de usuario para el sistema
+   * HOST: localhost
+   * DATABASE: railway
+   * DB_USER: postgres
+   * DB_PASSWORD: AiSgDqUTEIYGS29G16bk
 ```
-spring.datasource.url=jdbc:postgresql://aa2-00-456-89-20.compute-1.amazonaws.com:5432/p3o07c0vscreti
-spring.datasource.url=jdbc:postgresql://${HOST}:5432/${DATABASE}
+spring.datasource.url=jdbc:postgresql://postgres:AiSgDqUTEIYGS29G16bk@containers-us-west-120.railway.app:7574/railway
+spring.datasource.url=jdbc:postgresql://${HOST}:7574/${DATABASE}
 
-spring.datasource.username=upakngyoyusjkk
+spring.datasource.username=postgres
 spring.datasource.username=${DB_USER}
 
-spring.datasource.password=43d349675063932ac81c077af0a912459967bd5ccd57d5135d3fd6186429k887
+spring.datasource.password=AiSgDqUTEIYGS29G16bk
 spring.datasource.password=${DB_PASSWORD}
 ```
 6. Hacer un commit para provocar un deploy
 
 https://blog.railway.app/p/railway-heroku-rails
+
 https://blog.railway.app/p/postgre-backup
 
 # Frontend: Configuración Vercel
